@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const passport = require("passport");
 
 // Bring in files from routes/api
 const users = require("./routes/api/users");
@@ -24,7 +25,13 @@ mongoose
   .catch(err => console.log(err));
 
 // Test Route, should see this on localhost:5000
-app.get("/", (req, res) => res.send("Hello world"));
+// app.get("/", (req, res) => res.send("Hello world"));
+
+// Passport middleware
+app.use(passport.initialize());
+
+// Passport Config
+require("./config/passport")(passport);
 
 // Use routes
 app.use("/api/users", users);
