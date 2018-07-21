@@ -17,7 +17,13 @@ class Login extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  // Lifecycle method
+  // Lifecycle methods
+  componentDidMount() {
+    if (this.props.auth.isAuthenticated) {
+      // Redirect user to dashboard if trying to access /login if already logged in
+      this.props.history.push("/dashboard");
+    }
+  }
   componentWillReceiveProps(nextProps) {
     // Test if isAuthenticated == true, redirect to /dashboard
     if (nextProps.auth.isAuthenticated) {
